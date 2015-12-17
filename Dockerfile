@@ -1,9 +1,9 @@
-FROM rfkrocktk/baseimage:1.1.0
-MAINTAINER Naftuli Tzvi Kay <rfkrocktk@gmail.com>
+FROM nickelroll/jessie-baseimage:latest
+MAINTAINER Logan Attwood <logan@jnickel.com>
 
 ENV HOME /root
-ENV LANG en_US.UTF-8
-RUN locale-gen en_US.UTF-8
+ENV LANG en_CA.UTF-8
+RUN locale-gen en_CA.UTF-8
 
 # Fixes Docker Automated Build problem
 RUN ln -s -f /bin/true /usr/bin/chfn
@@ -33,19 +33,18 @@ RUN ln -s /etc/nginx/sites-available/puppetmaster /etc/nginx/sites-enabled/puppe
     && rm /etc/nginx/sites-enabled/default
 
 # Install the Puppet Master's rack server
-RUN mkdir -p /usr/share/puppet/rack/puppetmaster/tmp /usr/share/puppet/rack/puppetmaster/public \ 
+RUN mkdir -p /usr/share/puppet/rack/puppetmaster/tmp /usr/share/puppet/rack/puppetmaster/public \
     && chown puppet:puppet -R /usr/share/puppet/rack/puppetmaster
 
 # Backup the Puppet config files, we'll regenerate them on boot if they're not present
 RUN mkdir -p /usr/lib/puppet/default \
     && find /etc/puppet -maxdepth 1 -type f -iname "*.conf" -exec mv {} /usr/lib/puppet/default \; \
-    && cp /usr/share/puppet/ext/rack/config.ru /usr/lib/puppet/default 
+    && cp /usr/share/puppet/ext/rack/config.ru /usr/lib/puppet/default
 
 # Install boot scripts
 ADD scripts/10_generate_puppet_config.rb /etc/my_init.d/
 ADD scripts/11_generate_nginx_site.rb /etc/my_init.d/
 ADD scripts/12_generate_puppetmaster_keys.sh /etc/my_init.d/
-ADD scripts/13_add_puppet_cron.sh /etc/my_init.d/
 RUN chmod +x /etc/my_init.d/*
 
 # Install Puppet Agent script
