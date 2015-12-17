@@ -1,2 +1,2 @@
 # Repository for Phusion Passenger and NGINX
-deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main
+deb https://oss-binaries.phusionpassenger.com/apt/passenger jessie main
