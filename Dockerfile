@@ -42,10 +42,6 @@ ADD scripts/11_generate_nginx_site.rb /etc/my_init.d/
 ADD scripts/12_generate_puppetmaster_keys.sh /etc/my_init.d/
 RUN chmod +x /etc/my_init.d/*
 
-# Install Puppet Agent script
-ADD scripts/run-puppet-agent.sh /sbin/run-puppet-agent
-RUN chmod +x /sbin/run-puppet-agent
-
 # Install runit scripts
 ADD scripts/nginx-startup.sh /etc/service/nginx/run
 RUN chmod +x /etc/service/nginx/run
