@@ -1,6 +1,11 @@
 docker-puppetmaster
 ===================
 
+# Warning
+
+This has been forked. Uses Debian Jessie and the version of Puppet contained
+within. That should be the only diversions.
+
 A resplendently refreshing Docker image for hosting a containerized, self-provisioning Puppet Master,
 served by NGINX and Passenger. The current version is 3.8.3.
 
