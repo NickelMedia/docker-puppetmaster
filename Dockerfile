@@ -17,14 +17,9 @@ ADD conf/apt/passenger.list /etc/apt/sources.list.d/
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7 \
     && chmod 0600 /etc/apt/sources.list.d/passenger.list
 
-# Install Puppet Labs Repository for Trusty
-RUN curl -o puppet.deb -s https://apt.puppetlabs.com/puppetlabs-release-trusty.deb && \
-    DEBIAN_FRONTEND=noninteractive dpkg -i puppet.deb > /dev/null && \
-    rm puppet.deb
-
 # Install puppet, puppetmaster, nginx, and passenger
 RUN apt-get update -q 2 && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes -q 2 puppetmaster=3.8.3-1puppetlabs1 puppet=3.8.3-1puppetlabs1 \
+    apt-get install --yes -q 2 puppetmaster puppet \
         nginx-extras passenger >/dev/null
 
 # Install the nginx configuration and sites
