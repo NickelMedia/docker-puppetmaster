@@ -2,8 +2,6 @@ FROM nickelroll/jessie-baseimage:latest
 MAINTAINER Logan Attwood <logan@jnickel.com>
 
 ENV HOME /root
-ENV LANG en_CA.UTF-8
-RUN locale-gen en_CA.UTF-8
 
 # Fixes Docker Automated Build problem
 RUN ln -s -f /bin/true /usr/bin/chfn
@@ -33,8 +31,7 @@ RUN mkdir -p /usr/share/puppet/rack/puppetmaster/tmp /usr/share/puppet/rack/pupp
 
 # Backup the Puppet config files, we'll regenerate them on boot if they're not present
 RUN mkdir -p /usr/lib/puppet/default \
-    && find /etc/puppet -maxdepth 1 -type f -iname "*.conf" -exec mv {} /usr/lib/puppet/default \; \
-    && cp /usr/share/puppet/ext/rack/config.ru /usr/lib/puppet/default
+    && find /etc/puppet -maxdepth 1 -type f -iname "*.conf" -exec mv {} /usr/lib/puppet/default \;
 
 # Install boot scripts
 ADD scripts/10_generate_puppet_config.rb /etc/my_init.d/
