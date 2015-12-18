@@ -30,10 +30,10 @@ server {
     error_log                  /var/log/nginx/puppet_error.log;
 
     root                       /usr/share/puppet/rack/puppetmaster/public;
-    
+
     ssl_certificate            /var/lib/puppet/ssl/certs/#{fqdn}.pem;
     ssl_certificate_key        /var/lib/puppet/ssl/private_keys/#{fqdn}.pem;
-        
+
     # ssl hardening - https://j.mp/1qiXFeW
     ssl_prefer_server_ciphers  on;
     ssl_protocols              TLSv1 TLSv1.1 TLSv1.2;

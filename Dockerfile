@@ -43,6 +43,10 @@ RUN chmod +x /etc/my_init.d/*
 ADD scripts/nginx-startup.sh /etc/service/nginx/run
 RUN chmod +x /etc/service/nginx/run
 
+# Setup file descriptors for logging
+RUN ln -sf /dev/stdout /var/log/nginx/puppet_access.log \
+  && ln -sf /dev/stderr /var/log/nginx/puppet_error.log
+
 # Expose Puppet Master port
 EXPOSE 8140
 
